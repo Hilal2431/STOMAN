@@ -6,7 +6,11 @@
 
 {{-- PRD 6.3: "New" menu - 240px dropdown, 8px below the button, left-aligned.
      Office entries only appear when config('stoman.features.office_docs'). --}}
+<<<<<<< HEAD
 <x-dropdown width="w-60" align="left" :block="$block">
+=======
+<x-dropdown width="w-60" align="left">
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
     <x-slot:trigger>
         <x-button :size="$size" icon="plus" :id="$triggerId" :class="$block ? 'w-full' : ''">
             {{ __('stoman.nav.new') }}

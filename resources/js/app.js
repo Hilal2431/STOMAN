@@ -176,9 +176,12 @@ Alpine.data('shareModal', () => ({
         }
     },
     async done() {
+<<<<<<< HEAD
         if (this.email.trim()) {
             this.addChip();
         }
+=======
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
         if (this.members.length) {
             const currentFolderId = document.querySelector('[data-current-folder-id]')?.dataset?.currentFolderId || 'self';
             await api.share(currentFolderId, { members: this.members, role: this.role, link: this.linkEnabled });
@@ -201,7 +204,11 @@ window.initStomanDataTable = function (selector, ajaxUrl, extraParams = {}) {
     if (el.dataset.dtInitialized) {
         try {
             $(selector).DataTable().destroy();
+<<<<<<< HEAD
         } catch (_) { }
+=======
+        } catch (_) {}
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
     }
 
     el.dataset.dtInitialized = 'true';
@@ -284,7 +291,11 @@ window.initStomanDataTable = function (selector, ajaxUrl, extraParams = {}) {
     });
 
     return dt;
+<<<<<<< HEAD
 };
+=======
+};};
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
 
 Alpine.start();
 

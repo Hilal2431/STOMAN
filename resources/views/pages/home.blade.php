@@ -7,7 +7,11 @@
         $displayName = auth()->user()?->name ?? __('stoman.account.guest');
     @endphp
 
+<<<<<<< HEAD
     <div class="space-y-8" x-data="{ view: 'grid' }">
+=======
+    <div class="space-y-8">
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
         {{-- Header + quota widget --}}
         <header class="flex items-start justify-between gap-4">
             <div>

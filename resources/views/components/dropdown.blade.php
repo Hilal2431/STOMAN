@@ -2,16 +2,27 @@
     'align' => 'left',   // left | right
     'width' => 'w-60',   // 240px default (PRD 6.3)
     'label' => null,     // aria-label for the trigger wrapper
+<<<<<<< HEAD
     'block' => false,
+=======
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
 ])
 
 {{-- Generic dropdown (PRD 6.3 / 6.9). Slots: "trigger", "panel".
      Gap = 8px (mt-2); Esc and click-outside close it. --}}
+<<<<<<< HEAD
 <div {{ $attributes->class(['relative', 'w-full block' => $block, 'inline-block' => !$block]) }} x-data="{ open: false }"
     @click.outside="open = false" @keydown.escape.window="open = false">
     <div @click="open = !open" @keydown.enter.prevent="open = !open" @keydown.space.prevent="open = !open"
         @keydown.arrow-down.prevent="open = true" tabindex="0" @if($label) role="button" aria-haspopup="menu" :aria-expanded="open.toString()" aria-label="{{ $label }}" @endif
         class="focus-ring rounded-lg {{ $block ? 'w-full' : '' }}">
+=======
+<div {{ $attributes->class(['relative inline-block']) }} x-data="{ open: false }"
+    @click.outside="open = false" @keydown.escape.window="open = false">
+    <div @click="open = !open" @keydown.enter.prevent="open = !open" @keydown.space.prevent="open = !open"
+        @keydown.arrow-down.prevent="open = true" tabindex="0" @if($label) role="button" aria-haspopup="menu" :aria-expanded="open.toString()" aria-label="{{ $label }}" @endif
+        class="focus-ring rounded-lg">
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
         {{ $trigger }}
     </div>
 

@@ -77,7 +77,11 @@
         </div>
 
         <x-slot:footer>
+<<<<<<< HEAD
             <x-button variant="secondary" @click="$store.modals.share = false">{{ __('stoman.common.cancel') }}</x-button>
+=======
+            <span></span>
+>>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
             <x-button variant="primary" @click="done()">{{ __('stoman.common.done') }}</x-button>
         </x-slot:footer>
     </x-modal>
