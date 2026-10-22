@@ -64,6 +64,7 @@ class Folder extends Model
     public function getMetaLabelAttribute(): string
     {
         $count = $this->children()->count() + $this->files()->count();
+
         return $count === 1 ? '1 item' : "{$count} items";
     }
 

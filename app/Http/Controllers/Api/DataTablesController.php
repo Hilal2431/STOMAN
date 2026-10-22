@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\FileItem;
+use App\Models\Share;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,28 +23,39 @@ class DataTablesController extends Controller
     public function files(Request $request): JsonResponse
     {
         $user = $this->getUser();
-        $type = $request->query('type', 'all'); // all, starred, archived, trash
+        $type = $request->query('type', 'all'); // all, starred, archived, archive, trash, recent, shared
         $folderId = $request->query('folder_id');
 
-        $query = FileItem::with('user');
+        if ($type === 'shared') {
+            $email = $user?->email;
+            $sharedFileIds = $email
+                ? Share::where('shared_with_email', $email)->whereNotNull('file_id')->pluck('file_id')
+                : collect();
 
-        if ($user) {
-            $query->where('user_id', $user->id);
-        }
-
-        if ($type === 'trash') {
-            $query->where('is_trashed', true);
+            $query = FileItem::with('user')->whereIn('id', $sharedFileIds)->where('is_trashed', false);
         } else {
-            $query->where('is_trashed', false);
+            $query = FileItem::with('user');
 
-            if ($type === 'starred') {
-                $query->where('is_starred', true);
-            } elseif ($type === 'archived') {
-                $query->where('is_archived', true);
+            if ($user) {
+                $query->where('user_id', $user->id);
+            }
+
+            if ($type === 'trash') {
+                $query->where('is_trashed', true);
             } else {
-                $query->where('is_archived', false);
-                if (is_numeric($folderId)) {
-                    $query->where('folder_id', (int) $folderId);
+                $query->where('is_trashed', false);
+
+                if ($type === 'starred') {
+                    $query->where('is_starred', true);
+                } elseif ($type === 'archived' || $type === 'archive') {
+                    $query->where('is_archived', true);
+                } elseif ($type === 'recent') {
+                    $query->where('is_archived', false)->latest('updated_at');
+                } else {
+                    $query->where('is_archived', false);
+                    if (is_numeric($folderId)) {
+                        $query->where('folder_id', (int) $folderId);
+                    }
                 }
             }
         }

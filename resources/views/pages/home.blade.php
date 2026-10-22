@@ -7,11 +7,7 @@
         $displayName = auth()->user()?->name ?? __('stoman.account.guest');
     @endphp
 
-<<<<<<< HEAD
     <div class="space-y-8" x-data="{ view: 'grid' }">
-=======
-    <div class="space-y-8">
->>>>>>> 53d5b31c16628dcaef7f8f96fbb92d5dd621943d
         {{-- Header + quota widget --}}
         <header class="flex items-start justify-between gap-4">
             <div>
@@ -71,36 +67,66 @@
         {{-- Starred Folders --}}
         <section>
             <h2 class="mb-2 text-xl font-semibold leading-7 text-slate-900">{{ __('stoman.home.starred_title') }}</h2>
-            <x-empty-state variant="small" icon="star" :title="__('stoman.home.no_starred')" />
+            @if($starredFolders->isEmpty())
+                <x-empty-state variant="small" icon="star" :title="__('stoman.home.no_starred')" />
+            @else
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    @foreach ($starredFolders as $item)
+                        <x-folder-card
+                            :id="data_get($item, 'id')"
+                            :name="data_get($item, 'name', '')"
+                            :meta="data_get($item, 'meta_label', '')"
+                            :url="data_get($item, 'url', '#')"
+                            :starred="(bool) data_get($item, 'is_starred', false)" />
+                    @endforeach
+                </div>
+            @endif
         </section>
 
         {{-- Collaborative Folders --}}
         <section>
             <h2 class="mb-2 text-xl font-semibold leading-7 text-slate-900">{{ __('stoman.home.collab_title') }}</h2>
-            <x-empty-state variant="small" icon="users" :title="__('stoman.home.no_collab')">
-                <x-button variant="secondary" icon="folder-plus" @click="$store.modals.folder = true">
-                    {{ __('stoman.common.create_folder') }}
-                </x-button>
-            </x-empty-state>
+            @if($collaborativeFolders->isEmpty())
+                <x-empty-state variant="small" icon="users" :title="__('stoman.home.no_collab')">
+                    <x-button variant="secondary" icon="folder-plus" @click="$store.modals.folder = true">
+                        {{ __('stoman.common.create_folder') }}
+                    </x-button>
+                </x-empty-state>
+            @else
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    @foreach ($collaborativeFolders as $item)
+                        <x-folder-card
+                            :id="data_get($item, 'id')"
+                            :name="data_get($item, 'name', '')"
+                            :meta="data_get($item, 'meta_label', '')"
+                            :url="data_get($item, 'url', '#')"
+                            :starred="(bool) data_get($item, 'is_starred', false)" />
+                    @endforeach
+                </div>
+            @endif
         </section>
 
         {{-- Recently Opened Files --}}
         <section>
             <div class="mb-2 flex items-center justify-between gap-3">
                 <h2 class="text-xl font-semibold leading-7 text-slate-900">{{ __('stoman.home.recent_title') }}</h2>
-                <div class="flex items-center gap-2">
-                    <x-view-toggle disabled />
-                    <input type="search" disabled
-                        placeholder="{{ __('stoman.common.search_placeholder') }}"
-                        aria-label="{{ __('stoman.common.search_placeholder') }}"
-                        class="hidden h-8 w-56 rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-900 placeholder:text-slate-400 disabled:cursor-not-allowed disabled:opacity-50 md:block" />
-                </div>
             </div>
-            <x-empty-state variant="small" icon="file" :title="__('stoman.home.no_files')">
-                <x-button icon="upload" data-upload-trigger @click="$store.modals.upload = true">
-                    {{ __('stoman.common.upload_file') }}
-                </x-button>
-            </x-empty-state>
+            @if($files->isEmpty())
+                <x-empty-state variant="small" icon="file" :title="__('stoman.home.no_files')">
+                    <x-button icon="upload" data-upload-trigger @click="$store.modals.upload = true">
+                        {{ __('stoman.common.upload_file') }}
+                    </x-button>
+                </x-empty-state>
+            @else
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    @foreach ($files as $item)
+                        <x-file-card
+                            :id="data_get($item, 'id')"
+                            :name="data_get($item, 'name', '')"
+                            :meta="data_get($item, 'modified_label', '')" />
+                    @endforeach
+                </div>
+            @endif
         </section>
     </div>
 @endsection

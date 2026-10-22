@@ -64,8 +64,19 @@
                 <div x-show="view === 'grid'"
                     class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     @forelse ($items as $item)
-                        <x-file-card :id="data_get($item, 'id')" :name="data_get($item, 'name', '')"
-                            :meta="data_get($item, 'modified_label', '')" />
+                        @if($item instanceof \App\Models\Folder)
+                            <x-folder-card
+                                :id="data_get($item, 'id')"
+                                :name="data_get($item, 'name', '')"
+                                :meta="data_get($item, 'meta_label', '')"
+                                :url="data_get($item, 'url', '#')"
+                                :starred="(bool) data_get($item, 'is_starred', false)" />
+                        @else
+                            <x-file-card
+                                :id="data_get($item, 'id')"
+                                :name="data_get($item, 'name', '')"
+                                :meta="data_get($item, 'modified_label', '')" />
+                        @endif
                     @empty
                     @endforelse
                 </div>

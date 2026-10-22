@@ -33,11 +33,11 @@
                     @endforeach
                 </div>
             </div>
-
-            <x-slot:footer>
-                <x-button variant="secondary" @click="requestClose()">{{ __('stoman.common.cancel') }}</x-button>
-                <x-button variant="primary" @click="submit()">{{ __('stoman.common.create') }}</x-button>
-            </x-slot:footer>
         </form>
+
+        <x-slot:footer>
+            <x-button variant="secondary" @click="requestClose()">{{ __('stoman.common.cancel') }}</x-button>
+            <x-button variant="primary" @click="submit()">{{ __('stoman.common.create') }}</x-button>
+        </x-slot:footer>
     </x-modal>
 </div>

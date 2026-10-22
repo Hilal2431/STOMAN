@@ -48,6 +48,33 @@
     [x-cloak] {
         display: none !important;
     }
+
+    /* Restore pointer cursor on all interactive elements.
+       Tailwind v4 preflight resets cursor to 'default' on buttons/inputs. */
+    button,
+    [type='button'],
+    [type='reset'],
+    [type='submit'],
+    [role='button'],
+    [role='menuitem'],
+    [role='tab'],
+    [role='option'],
+    [role='radio'],
+    [role='checkbox'],
+    a[href],
+    label[for],
+    select,
+    summary {
+        cursor: pointer;
+    }
+
+    button:disabled,
+    [type='button']:disabled,
+    [type='submit']:disabled,
+    [role='button'][disabled],
+    [aria-disabled='true'] {
+        cursor: not-allowed;
+    }
 }
 
 @layer components {

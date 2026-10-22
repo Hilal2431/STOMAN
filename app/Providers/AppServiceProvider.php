@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,9 +13,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bindIf('request', function ($app) {
-            return $app->bound(\Illuminate\Http\Request::class)
-                ? $app->make(\Illuminate\Http\Request::class)
-                : \Illuminate\Http\Request::create('/');
+            return $app->bound(Request::class)
+                ? $app->make(Request::class)
+                : Request::create('/');
         });
     }
 

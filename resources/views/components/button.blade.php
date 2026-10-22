@@ -10,7 +10,7 @@
 
 {{-- PRD 6.1: button variants, sizes, focus ring, disabled and loading states. --}}
 @php
-    $base = 'inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors focus-ring disabled:opacity-50 disabled:cursor-not-allowed';
+    $base = 'inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors focus-ring cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed';
 
     $variants = [
         'primary' => 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800',

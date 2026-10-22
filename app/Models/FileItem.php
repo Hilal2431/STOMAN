@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Storage;
 
 class FileItem extends Model
 {
@@ -80,6 +79,7 @@ class FileItem extends Model
         if ($bytes < 1024 * 1024 * 1024) {
             return round($bytes / (1024 * 1024), 1).' MB';
         }
+
         return round($bytes / (1024 * 1024 * 1024), 1).' GB';
     }
 

@@ -72,6 +72,7 @@ class ItemController extends Controller
 
         if ($recent) {
             $fileQuery->orderByDesc('updated_at')->limit(20);
+
             return response()->json([
                 'folders' => [],
                 'files' => $fileQuery->get(),
@@ -102,12 +103,14 @@ class ItemController extends Controller
         $file = FileItem::find($id);
         if ($file) {
             $file->update(['name' => $name]);
+
             return response()->json(['success' => true, 'id' => $id, 'name' => $name, 'item' => $file]);
         }
 
         $folder = Folder::find($id);
         if ($folder) {
             $folder->update(['name' => $name]);
+
             return response()->json(['success' => true, 'id' => $id, 'name' => $name, 'item' => $folder]);
         }
 
@@ -124,12 +127,14 @@ class ItemController extends Controller
         $file = FileItem::find($id);
         if ($file) {
             $file->update(['is_starred' => $starred]);
+
             return response()->json(['success' => true, 'item' => $file]);
         }
 
         $folder = Folder::find($id);
         if ($folder) {
             $folder->update(['is_starred' => $starred]);
+
             return response()->json(['success' => true, 'item' => $folder]);
         }
 

@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -42,6 +41,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             // Generate JWT token as well
             $token = auth('api')->login(Auth::user());
+
             return redirect()->intended(route('storage.index'))->with('jwt_token', $token);
         }
 
@@ -82,7 +82,8 @@ class AuthController extends Controller
             if (auth('api')->check()) {
                 auth('api')->logout();
             }
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         Auth::logout();
         $request->session()->invalidate();
@@ -184,6 +185,7 @@ class AuthController extends Controller
     {
         try {
             $newToken = auth('api')->refresh();
+
             return $this->respondWithToken($newToken, auth('api')->user());
         } catch (\Exception $e) {
             return response()->json([

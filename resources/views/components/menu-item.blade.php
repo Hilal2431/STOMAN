@@ -6,7 +6,7 @@
 
 {{-- Dropdown row (PRD 6.3/6.9): 40px high, icon + label. --}}
 @php
-    $classes = 'flex w-full items-center gap-2.5 h-10 px-3 rounded-lg text-sm text-left transition-colors focus-ring '.($danger ? 'text-danger-600 hover:bg-danger-50' : 'text-slate-700 hover:bg-slate-100');
+    $classes = 'flex w-full items-center gap-2.5 h-10 px-3 rounded-lg text-sm text-left transition-colors focus-ring cursor-pointer '.($danger ? 'text-danger-600 hover:bg-danger-50' : 'text-slate-700 hover:bg-slate-100');
 @endphp
 
 @if($href)

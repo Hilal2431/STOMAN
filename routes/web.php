@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecentController;
@@ -9,8 +10,6 @@ use App\Http\Controllers\StarredController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\Api\AuthController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
